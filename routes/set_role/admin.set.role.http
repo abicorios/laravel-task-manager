@@ -1,0 +1,40 @@
+###
+# group: auth
+# @name login/browser
+POST {{host}}/login
+Referer: {{referer}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "admin@example.com",
+    "password": "123456"
+}
+
+> {%
+    client.global.set("authToken", response.body.token);
+%}
+
+###
+# group: user
+# @name set-role
+POST {{host}}/users/{{userId}}/set-role
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "role": "ADMIN"
+}
+
+###
+# group: user
+# @name set-role
+POST {{host}}/users/{{userId}}/set-role
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "role": "USER"
+}

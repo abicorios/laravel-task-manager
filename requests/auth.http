@@ -7,7 +7,21 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
+    "email": "admin@example.com",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
+###
+# group: auth
+# @name register/browser
+POST {{host}}/register
+Referer: {{referer}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
     "password": "123456",
     "password_confirmation": "123456"
 }
@@ -21,7 +35,24 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "test@example.com",
+    "email": "admin@example.com",
+    "password": "123456"
+}
+
+> {%
+    client.global.set("authToken", response.body.token);
+%}
+
+###
+# group: auth
+# @name login/browser
+POST {{host}}/login
+Referer: {{referer}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
     "password": "123456"
 }
 
@@ -38,7 +69,12 @@ Accept: application/json
 Authorization: Bearer {{authToken}}
 
 > {%
-    client.global.set("userId", response.body.id);
+    if (response.body.email === "admin@example.com") {
+        client.global.set("adminId", response.body.id);
+    }
+    if (response.body.email === "user@example.com") {
+        client.global.set("userId", response.body.id);
+    }
     console.log(client.global)
 %}
 

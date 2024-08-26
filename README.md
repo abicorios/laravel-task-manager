@@ -29,3 +29,11 @@ You can run the API requests in PhpStorm from the `requests` directory.
 
 # Database
 You can run SQL requests to the database in PhpStorm. Get credentials from the `.env` file, but the DB host is `localhost`.
+
+# Add roles
+```shell
+# Update the migration file
+./vendor/bin/sail artisan make:migration add_role_to_users_table --table=users
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan make:controller UserController
+```

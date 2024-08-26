@@ -13,6 +13,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User create(array $attributes = [])
  */
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User findOrFail($id)
+ */
+/**
+ * @property string role
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -47,6 +53,12 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $guarded = [
+        'id',
+        'role',
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -66,5 +78,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'ADMIN';
     }
 }

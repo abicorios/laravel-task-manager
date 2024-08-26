@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
@@ -28,4 +29,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/protected', function () {
         return response()->json(['message' => 'Protected route']);
     });
+});
+
+Route::middleware(['auth:api', 'can:isAdmin'])->group(function () {
+    Route::post('users/{id}/set-role', [UserController::class, 'setRole']);
 });
