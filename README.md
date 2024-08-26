@@ -20,5 +20,6 @@ Refs: https://laravel.com/docs/10.x/installation, https://laravel.build/example-
 ./vendor/bin/sail composer require tymon/jwt-auth
 ./vendor/bin/sail artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ./vendor/bin/sail artisan jwt:secret
+./vendor/bin/sail artisan make:controller AuthController
 ```
 Refs: https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
