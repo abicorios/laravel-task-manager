@@ -1,0 +1,11 @@
+###
+# group: test.auth
+# @name protected
+GET {{host}}/protected
+Accept: application/json
+Authorization: Bearer {{authToken}}
+
+###
+# group: test.auth
+# @name unprotected
+GET {{host}}/unprotected

@@ -1,0 +1,60 @@
+###
+# group: auth
+# @name register/browser
+POST {{host}}/register
+Referer: {{referer}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "123456",
+    "password_confirmation": "123456"
+}
+
+###
+# group: auth
+# @name login/browser
+POST {{host}}/login
+Referer: {{referer}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "123456"
+}
+
+> {%
+    client.global.set("authToken", response.body.token);
+%}
+
+###
+# group: auth
+# @name me/browser
+GET {{host}}/me
+Referer: {{referer}}
+Accept: application/json
+Authorization: Bearer {{authToken}}
+
+> {%
+    client.global.set("userId", response.body.id);
+    console.log(client.global)
+%}
+
+###
+# group: auth
+# @name logout/browser
+POST {{host}}/logout
+Referer: {{referer}}
+Accept: application/json
+Authorization: Bearer {{authToken}}
+
+###
+# group: auth
+# @name delete/browser
+DELETE {{host}}/delete
+Referer: {{referer}}
+Accept: application/json
+Authorization: Bearer {{authToken}}
+

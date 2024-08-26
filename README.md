@@ -23,3 +23,9 @@ Refs: https://laravel.com/docs/10.x/installation, https://laravel.build/example-
 ./vendor/bin/sail artisan make:controller AuthController
 ```
 Refs: https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
+
+# Requests
+You can run the API requests in PhpStorm from the `requests` directory.
+
+# Database
+You can run SQL requests to the database in PhpStorm. Get credentials from the `.env` file, but the DB host is `localhost`.
