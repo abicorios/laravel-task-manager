@@ -13,3 +13,4 @@ git commit -m "Initial commit"
 git remote add origin git@github.com:abicorios/laravel-task-manager.git
 git push -u origin master
 ```
+Refs: https://laravel.com/docs/10.x/installation, https://laravel.build/example-app?with=pgsql
