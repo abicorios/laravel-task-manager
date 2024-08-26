@@ -18,5 +18,6 @@ Refs: https://laravel.com/docs/10.x/installation, https://laravel.build/example-
 # JWT
 ```shell
 ./vendor/bin/sail composer require tymon/jwt-auth
+./vendor/bin/sail artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ```
 Refs: https://jwt-auth.readthedocs.io/en/develop/laravel-installation/
