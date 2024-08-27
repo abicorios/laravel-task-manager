@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaskCategoryController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -31,6 +32,7 @@ Route::middleware('auth:api')->group(function () {
         return response()->json(['message' => 'Protected route']);
     });
     Route::apiResource('task-categories', TaskCategoryController::class);
+    Route::apiResource('tasks', TaskController::class);
 });
 
 Route::middleware(['auth:api', 'can:isAdmin'])->group(function () {

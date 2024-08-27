@@ -12,15 +12,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User create(array $attributes = [])
- */
-/**
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User findOrFail($id)
- */
-/**
  * @property string role
- */
-
-/**
  * @property number id
  */
 class User extends Authenticatable implements JWTSubject

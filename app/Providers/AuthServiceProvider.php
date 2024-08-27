@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use App\Models\TaskCategory;
 use App\Models\User;
 use App\Policies\TaskCategoryPolicy;
+use App\Policies\TaskPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         TaskCategory::class => TaskCategoryPolicy::class,
+        Task::class => TaskPolicy::class,
     ];
 
     /**

@@ -1,0 +1,56 @@
+###
+# group: tasks
+# @name index
+GET {{host}}/tasks
+Authorization: Bearer {{authToken}}
+
+> {%
+    const data = response.body.data;
+    if (data.length > 0) {
+        if (typeof data[0].id !== "undefined") {
+            client.global.set("taskId", data[0].id);
+        }
+    } else {
+        client.global.clear("taskId");
+    }
+    console.log(client.global)
+ %}
+
+###
+# group: tasks
+# @name show
+GET {{host}}/tasks/{{taskId}}
+Authorization: Bearer {{authToken}}
+
+###
+# group: tasks
+# @name tasks/create
+POST {{host}}/tasks
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "name": "Task 1",
+    "task_category_id": 1
+}
+
+###
+# group: tasks
+# @name update
+PUT {{host}}/tasks/{{taskId}}
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "name": "Task 1.1",
+    "task_category_id": 1,
+    "done": false
+}
+
+###
+# group: tasks
+# @name delete
+DELETE {{host}}/tasks/{{taskId}}
+Authorization: Bearer {{authToken}}
