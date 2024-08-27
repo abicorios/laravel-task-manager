@@ -1,7 +1,7 @@
 ###
 # group: tasks
 # @name index
-GET {{host}}/tasks
+GET {{host}}/tasks?task_category_id=1
 Authorization: Bearer {{authToken}}
 
 > {%

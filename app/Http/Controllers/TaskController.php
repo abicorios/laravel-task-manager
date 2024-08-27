@@ -8,6 +8,7 @@ use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -19,17 +20,23 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
         /**
          * @var User $user
          */
         $user = auth()->user();
-        if ($user->role === 'ADMIN') {
-            $tasks = Task::all();
-        } else {
-            $tasks = Task::where('user_id', auth()->id())->get();
+        $query = Task::query();
+
+        if ($user->role !== 'ADMIN') {
+            $query->where('user_id', auth()->id());
         }
+
+        if ($request->has('task_category_id')) {
+            $query->where('task_category_id', $request->input('task_category_id'));
+        }
+
+        $tasks = $query->get();
         return TaskResource::collection($tasks)->response();
     }
 
