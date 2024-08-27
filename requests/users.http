@@ -3,3 +3,9 @@
 # @name index
 GET {{host}}/users
 Authorization: Bearer {{authToken}}
+
+###
+# group: users
+# @name show
+GET {{host}}/users/1
+Authorization: Bearer {{authToken}}

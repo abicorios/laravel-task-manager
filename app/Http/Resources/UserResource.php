@@ -8,6 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * User
  *
+ * @property int id
  * @property string email
  * @method tasks()
  */
@@ -21,6 +22,7 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'email' => $this->email,
             'task_count' => $this->tasks()->count(),
         ];

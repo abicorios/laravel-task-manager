@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TaskCategory create(array $array)
@@ -19,4 +20,9 @@ class TaskCategory extends Model
         'name',
         'type',
     ];
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }
