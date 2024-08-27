@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type')->default('custom');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
 
         DB::table('task_categories')->insert([
             'name' => 'Urgent',
             'type' => 'standard',
+            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

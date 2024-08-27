@@ -23,6 +23,7 @@ class UpdateTaskCategoryRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255', 'unique:task_categories,name,' . $this->route('task_category')->id],
+            'user_id' => ['numeric', 'exists:users,id'],
         ];
     }
 }

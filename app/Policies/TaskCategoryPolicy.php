@@ -20,7 +20,7 @@ class TaskCategoryPolicy
      */
     public function view(User $user, TaskCategory $taskCategory): bool
     {
-        return true;
+        return $user->isAdmin() || $user->id === $taskCategory->user_id || $taskCategory->type === 'standard';
     }
 
     /**
@@ -36,7 +36,7 @@ class TaskCategoryPolicy
      */
     public function update(User $user, TaskCategory $taskCategory): bool
     {
-        return $user->isAdmin() && $taskCategory->type !== 'standard';
+        return ($user->isAdmin() || $user->id === $taskCategory->user_id) && $taskCategory->type !== 'standard';
     }
 
     /**

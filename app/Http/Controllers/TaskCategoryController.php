@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskCategoryRequest;
 use App\Http\Requests\UpdateTaskCategoryRequest;
 use App\Models\TaskCategory;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
 class TaskCategoryController extends Controller
@@ -19,7 +20,7 @@ class TaskCategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        $taskCategories = TaskCategory::all();
+        $taskCategories = auth()->user()->task_categories;
         return response()->json($taskCategories);
     }
 
@@ -28,7 +29,7 @@ class TaskCategoryController extends Controller
      */
     public function store(StoreTaskCategoryRequest $request): JsonResponse
     {
-        $taskCategory = TaskCategory::create(['name' => $request->name]);
+        $taskCategory = TaskCategory::create(['name' => $request->str('name'), 'user_id' => auth()->id()]);
         return response()->json($taskCategory, 201);
     }
 
@@ -46,8 +47,15 @@ class TaskCategoryController extends Controller
     public function update(UpdateTaskCategoryRequest $request, TaskCategory $taskCategory): JsonResponse
     {
         if ($request->has('name')) {
-            if($request->name) {
-                $taskCategory->name = $request->name;
+            if($request->str('name')) {
+                $taskCategory->name = $request->str('name');
+                $taskCategory->save();
+            }
+        }
+        if ($request->has('user_id')) {
+            if($request->str('user_id') && auth()->user()->isAdmin()) {
+                User::findOrFail($request->str('user_id'));
+                $taskCategory->user_id = $request->str('user_id');
                 $taskCategory->save();
             }
         }

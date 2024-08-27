@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\TaskCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -11,8 +10,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *
  * @property string email
  * @property int id
+ * @property array task_categories
  * @method tasks()
- * @method task_categories()
  */
 class OneUserResource extends JsonResource
 {
@@ -24,16 +23,14 @@ class OneUserResource extends JsonResource
     public function toArray(Request $request): array
     {
         $result = [];
-        $task_categories = TaskCategory::all();
+        $task_categories = $this->task_categories;
         foreach ($task_categories as $task_category) {
             $task_count = $task_category->tasks()->where('user_id', $this->id)->count();
-            if ($task_count > 0) {
-                $result[] = [
-                    'email' => $this->email,
-                    'name' => $task_category->name,
-                    'task_count' => $task_count,
-                ];
-            }
+            $result[] = [
+                'email' => $this->email,
+                'name' => $task_category->name,
+                'task_count' => $task_count,
+            ];
         }
         return $result;
     }

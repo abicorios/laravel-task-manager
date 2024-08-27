@@ -53,6 +53,9 @@ class AuthController extends Controller
     public function delete(Request $request): JsonResponse
     {
         $user = Auth::user();
+        if ($user->id == 1) {
+            return response()->json(['error' => 'You cannot delete the main admin account'], 403);
+        }
         $user->delete();
         return response()->json(['message' => 'Successfully unregistered']);
     }

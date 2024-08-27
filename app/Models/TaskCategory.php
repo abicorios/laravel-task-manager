@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TaskCategory find(int $id)
  * @property string name
  * @property string type
+ * @property int user_id
  */
 class TaskCategory extends Model
 {
@@ -19,6 +20,7 @@ class TaskCategory extends Model
     protected $fillable = [
         'name',
         'type',
+        'user_id',
     ];
 
     public function tasks(): HasMany

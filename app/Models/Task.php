@@ -22,14 +22,4 @@ class Task extends Model
         'user_id',
         'task_category_id',
     ];
-
-    public function task_category(): BelongsTo
-    {
-        return $this->belongsTo(TaskCategory::class);
-    }
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }

@@ -14,6 +14,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User create(array $attributes = [])
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User findOrFail($id)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User find($id)
  * @property string role
  * @property number id
  */
@@ -86,5 +87,9 @@ class User extends Authenticatable implements JWTSubject
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+    public function task_categories(): HasMany
+    {
+        return $this->hasMany(TaskCategory::class)->orWhere('type', '=', 'standard');
     }
 }
