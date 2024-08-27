@@ -33,6 +33,7 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::apiResource('task-categories', TaskCategoryController::class);
     Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('users', UserController::class);
 });
 
 Route::middleware(['auth:api', 'can:isAdmin'])->group(function () {

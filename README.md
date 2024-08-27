@@ -45,13 +45,22 @@ You can run SQL requests to the database in PhpStorm. Get credentials from the `
 ./vendor/bin/sail artisan migrate
 ```
 
-Add the tasks
+# Add the tasks
 ```shell
 ./vendor/bin/sail artisan make:model Task -c -m --policy --api -R
 # Update the migration file
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan make:resource TaskResource
 ```
+
+# Update the user controller
+```shell
+mv app/Http/Controllers/UserController{,2}.php
+mv app/Models/User{,2}.php
+./vendor/bin/sail artisan make:model User -c --policy --api -R
+./vendor/bin/sail artisan make:resource UserResource
+```
+Then manually merge models and controllers.
 
 # XDebug
 Edit the `.env` file and add the following line: `SAIL_XDEBUG_MODE=debug`. Then restart the container with `Ctrl+C` and `./vendor/bin/sail up`.

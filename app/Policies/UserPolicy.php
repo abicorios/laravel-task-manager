@@ -2,25 +2,24 @@
 
 namespace App\Policies;
 
-use App\Models\Task;
 use App\Models\User;
 
-class TaskPolicy
+class UserPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Task $task): bool
+    public function view(User $user, User $model): bool
     {
-        return $user->isAdmin() || $user->id === $task->user_id;
+        return $user->isAdmin();
     }
 
     /**
@@ -28,22 +27,22 @@ class TaskPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Task $task): bool
+    public function update(User $user, User $model): bool
     {
-        return $user->isAdmin() || $user->id === $task->user_id;
+        return $user->isAdmin();
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Task $task): bool
+    public function delete(User $user, User $model): bool
     {
-        return $user->isAdmin() || $user->id === $task->user_id;
+        return $user->isAdmin();
     }
 }
