@@ -1,0 +1,42 @@
+###
+# group: task.categories
+# @name index
+GET {{host}}/task-categories
+Authorization: Bearer {{authToken}}
+
+###
+# group: task.categories
+# @name show
+GET {{host}}/task-categories/1
+Authorization: Bearer {{authToken}}
+
+###
+# group: task.categories
+# @name create
+# @timeout 1 m
+POST {{host}}/task-categories
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "name": "Category 1"
+}
+
+###
+# group: task.categories
+# @name update
+PUT {{host}}/task-categories/2
+Accept: application/json
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "name": "Category 1.1"
+}
+
+###
+# group: task.categories
+# @name delete
+DELETE {{host}}/task-categories/1
+Authorization: Bearer {{authToken}}

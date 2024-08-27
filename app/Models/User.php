@@ -19,6 +19,10 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 /**
  * @property string role
  */
+
+/**
+ * @property number id
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;

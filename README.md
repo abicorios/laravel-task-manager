@@ -37,3 +37,13 @@ You can run SQL requests to the database in PhpStorm. Get credentials from the `
 ./vendor/bin/sail artisan migrate
 ./vendor/bin/sail artisan make:controller UserController
 ```
+
+# Add the task categories
+```shell
+./vendor/bin/sail artisan make:model TaskCategory -c -m --policy --api -R
+# Update the migration file
+./vendor/bin/sail artisan migrate
+```
+
+# XDebug
+Edit the `.env` file and add the following line: `SAIL_XDEBUG_MODE=debug`. Then restart the container with `Ctrl+C` and `./vendor/bin/sail up`.
